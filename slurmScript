@@ -1,0 +1,28 @@
+#!/bin/bash
+
+script_path=$1
+
+echo "Enter max wall time (HH:MM:SS):"
+read -r wall_time
+
+echo "Enter max memory (xxxG):"
+read -r max_memory
+
+echo "Enter job name:"
+read -r job_name
+
+cat > "${script_path}" << EOF
+#!/bin/bash
+#SBATCH --export=ALL
+#SBATCH -p mrcq 
+#SBATCH --time=${wall_time}
+#SBATCH -A Research_Project-MRC190311 
+#SBATCH --nodes=1 
+#SBATCH --ntasks-per-node=16
+#SBATCH --mem=${max_memory}
+#SBATCH --mail-type=END 
+#SBATCH --output=${job_name}%j.log
+#SBATCH --error=${job_name}%j.err
+#SBATCH --job-name=${job_name}
+
+EOF
