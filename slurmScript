@@ -25,7 +25,7 @@ read -r max_memory
 echo "Enter job name:"
 read -r job_name
 
-cat > "${script_path}" << EOF
+cat >> "${script_path}" << EOF
 #!/bin/bash
 #SBATCH --export=ALL
 #SBATCH -p mrcq 
