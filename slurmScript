@@ -11,6 +11,7 @@ Author: Sam Fletcher
 Contact: s.o.fletcher@exeter.ac.uk
 ===================================================================
 EOF
+    exit 0
 }
 
 script_path=$1
