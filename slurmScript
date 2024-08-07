@@ -1,6 +1,20 @@
 #!/bin/bash
 
+usage() {
+cat << EOF
+===================================================================
+slurmScript
+===================================================================
+Purpose: Creates a new slurm script with required SBATCH directives
+Arguments: \$1 -> path to new slurm script (required)
+Author: Sam Fletcher
+Contact: s.o.fletcher@exeter.ac.uk
+===================================================================
+EOF
+}
+
 script_path=$1
+if [[ $# -ne 1 ]]; then usage; fi
 
 echo "Enter max wall time (HH:MM:SS):"
 read -r wall_time
