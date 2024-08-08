@@ -102,6 +102,12 @@ bacct 20 60
 Running this command can allow you to monitor your scripts status in the
 background. Perhaps on a second screen? Do what you will.
 
+Also, `sacct` is not being run with those yucky uninformative default columns.
+`bacct` instead uses the following columns in its output:
+
+|JobName|JobID|NodeList|Elapsed|Timelimit|State|
+|-------|-----|--------|-------|---------|-----|
+
 ## getNode
 
 Sometimes a script is running on a node that you don't want it to. In the past

@@ -35,6 +35,6 @@ if ! [[ "${interval_seconds}" =~ ^[0-9]+$ ]]; then usage; fi
 sequence=$(seq 1 "$iterations")
 for _ in $sequence; do
     printf "\033[H\033[2J" #Moves terminal to current line
-    sacct -o JobID,JobName,NodeList,Elapsed,Timelimit,State
+    sacct -o JobName,JobID,NodeList,Elapsed,Timelimit,State
     sleep "${interval_seconds}"
 done
