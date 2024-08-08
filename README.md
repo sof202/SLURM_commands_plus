@@ -1,15 +1,19 @@
 # SLURM commands plus
 
-SlURM is great, but there is a lot of things that it doesn't do that pisses me
-off. Contained is a collection of scripts that you can add to your `$PATH` that
+SLURM is great, but there is a lot of things that it doesn't do that pisses me
+off. 
+
+Contained is a collection of scripts that you can add to your `$PATH` that
 may be of use to you.
 
-You may find it useful to create a symlink to these scripts if you don't want
-to add anything to your `$PATH`. You can do this with:
+You can have this done for you by running the `setup` script located inside
+of the setup directory. Upon running please now execute the command:
 
 ```bash
-ln -s path/to/this/repo/script-name path/to/somewhere/on/$PATH/
+source ~/.bash_profile
 ```
+
+This is also pasted to the terminal after running `setup`.
 
 ## slurmScript
 

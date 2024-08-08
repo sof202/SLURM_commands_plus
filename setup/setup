@@ -1,0 +1,18 @@
+#!/bin/bash
+# This seems overcomplicated, but I don't want to add the setup script
+# to your path
+setup_directory=$(realpath "$(dirname "$0")")
+repo_directory=$(dirname "${setup_directory}")
+bash_profile="$HOME/.bash_profile"
+
+if [[ "$PATH" != *"${repo_directory}"* ]]; then
+cat >> ${bash_profile} << EOF
+
+export PATH="\$PATH:${repo_directory}"
+
+EOF
+    echo "Please now execute: source ${bash_profile}"
+else
+    echo "SLURM commands plus is already on your path"
+fi
+
