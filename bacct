@@ -1,7 +1,22 @@
 #!/bin/bash
 
+usage() {
+cat << EOF
+===================================================================
+bacct
+===================================================================
+Purpose: Continuously runs sacct for x iterations
+Arguments: \$1 -> number of iterations [default: 10]
+Author: Sam Fletcher
+Contact: s.o.fletcher@exeter.ac.uk
+===================================================================
+EOF
+    exit 0
+}
+
 iterations=$1
-if [[ -z $iterations ]]; then iterations=10; fi
+if [[ -z "${iterations}" ]]; then iterations=10; fi
+if ! [[ "${iterations}" =~ ^[0-9]+$ ]]; then usage; fi
 
 sequence=$(seq 1 "$iterations")
 for i in $sequence; do
