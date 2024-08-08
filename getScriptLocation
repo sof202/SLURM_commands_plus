@@ -7,7 +7,7 @@ getScriptLocation
 ===================================================================
 Purpose: Gets the location of the script being run
 Arguments: \$1 -> SLURM job ID
-Optional arguments: -v -> verbose
+Optional arguments: -v -> verbose -d -> get script directory
 Author: Sam Fletcher
 Contact: s.o.fletcher@exeter.ac.uk
 ===================================================================
@@ -15,9 +15,10 @@ EOF
     exit 0
 }
 
-while getopts v OPT; do
+while getopts vd OPT; do
     case "$OPT" in
         v ) verbose=TRUE ;;
+        d ) directory=TRUE ;;
         \? ) usage ;;
     esac
 done
@@ -38,5 +39,9 @@ grep "Command" | \
 awk '{print $1}' | \
 awk 'BEGIN {FS="="} {print $2}' \
 )
+
+if [[ "${directory}" == "TRUE" ]]; then
+    location=$(dirname "${location}")
+fi
 
 echo "${location}"

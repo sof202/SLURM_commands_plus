@@ -82,11 +82,24 @@ job ID, and can give a more verbose output if supplied with the `-v` option
 like so:
 
 ```bash
-# outputs just the node
+# outputs script location
 getScriptLocation 123456
-$ /path/to/your/script
+$ /path/to/your/script.sh
 
-# ouputs node in human readable format
+# ouputs script location in human readable format
 getScriptLocation -v 123456
-$ Job ${jobID} is located at: /path/to/your/script
+$ Job ${jobID} is located at: /path/to/your/script.sh
+```
+
+Furthermore, you may just want to get the directory that the script is located
+in. To do this, provide the script with the `-d` option like so:
+
+```bash
+# outputs the directory the script is in
+getScriptLocation -d 123456
+$ /path/to/script/directory
+
+# ouputs the directory the script is in in human readable format
+getScriptLocation -vd 123456
+$ Job ${jobID} is located at: /path/to/script/directory
 ```
