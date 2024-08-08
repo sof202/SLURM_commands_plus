@@ -1,4 +1,4 @@
-# SLURM commands plus
+# SLURM commands+
 
 SLURM is great, but there is a lot of things that it doesn't do that pisses me
 off. 
