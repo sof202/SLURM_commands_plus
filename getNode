@@ -1,0 +1,44 @@
+#!/bin/bash
+
+usage() {
+cat << EOF
+===================================================================
+getNode
+===================================================================
+Purpose: Gets the node that a job was submitted to
+Arguments: \$1 -> SLURM job ID
+optional arguments: -v -> verbose
+Author: Sam Fletcher
+Contact: s.o.fletcher@exeter.ac.uk
+===================================================================
+EOF
+    exit 0
+}
+
+while getopts v OPT; do
+    case "$OPT" in
+        v ) verbose=TRUE ;;
+        \? ) usage ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+jobID=$1
+
+if [[ -z "${jobID}" ]]; then usage; fi
+
+if [[ "${verbose}" == "TRUE" ]]; then
+    echo -n "Job ${jobID} is running on: "
+fi
+
+node=$(\
+scontrol show job "${jobID}" | \
+grep "[^ReqExc]NodeList=" | \
+awk 'BEGIN {FS = "="} {print $2}' \
+)
+
+echo "${node}"
+
+exit 0
+
