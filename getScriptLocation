@@ -29,10 +29,6 @@ jobID=$1
 
 if [[ -z "${jobID}" ]]; then usage; fi
 
-if [[ "${verbose}" == "TRUE" ]]; then
-    echo -n "Job ${jobID} is located at: "
-fi
-
 location=$(\
 scontrol show job "${jobID}" | \
 grep "Command" | \
@@ -42,6 +38,12 @@ awk 'BEGIN {FS="="} {print $2}' \
 
 if [[ "${directory}" == "TRUE" ]]; then
     location=$(dirname "${location}")
+fi
+
+scriptName=$(basename "${location}")
+
+if [[ "${verbose}" == "TRUE" ]]; then
+    echo -n "${scriptName} (Job ID: ${jobID}) is located at: "
 fi
 
 echo "${location}"

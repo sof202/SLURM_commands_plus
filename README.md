@@ -88,7 +88,7 @@ $ /path/to/your/script.sh
 
 # ouputs script location in human readable format
 getScriptLocation -v 123456
-$ Job ${jobID} is located at: /path/to/your/script.sh
+$ script.sh (Job ID: 123456) is located at: /path/to/your/script.sh
 ```
 
 Furthermore, you may just want to get the directory that the script is located
@@ -101,5 +101,5 @@ $ /path/to/script/directory
 
 # ouputs the directory the script is in in human readable format
 getScriptLocation -vd 123456
-$ Job ${jobID} is located at: /path/to/script/directory
+$ script.sh (Job ID: 123456) is located at: /path/to/script/directory
 ```
