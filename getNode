@@ -7,7 +7,7 @@ getNode
 ===================================================================
 Purpose: Gets the node that a job was submitted to
 Arguments: \$1 -> SLURM job ID
-optional arguments: -v -> verbose
+Optional arguments: -v -> verbose
 Author: Sam Fletcher
 Contact: s.o.fletcher@exeter.ac.uk
 ===================================================================
