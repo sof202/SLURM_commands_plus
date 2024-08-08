@@ -16,6 +16,10 @@ source ~/.bash_profile
 
 This is also pasted to the terminal after running `setup`.
 
+If you can't be fucked to read how each script works below, you can always
+just run the script with the `-h` flag (or just run the script incorrectly
+I guess).
+
 ## slurmScript
 
 Run this to create the basic structure of a slurm script, hassle free.

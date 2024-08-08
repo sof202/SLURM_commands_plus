@@ -15,9 +15,10 @@ EOF
     exit 0
 }
 
-while getopts vd OPT; do
+while getopts vhd OPT; do
     case "$OPT" in
         v ) verbose=TRUE ;;
+        h ) usage ;;
         d ) directory=TRUE ;;
         \? ) usage ;;
     esac

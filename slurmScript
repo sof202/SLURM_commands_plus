@@ -15,9 +15,10 @@ EOF
     exit 0
 }
 
-while getopts a OPT; do
+while getopts ah OPT; do
     case "$OPT" in
         a ) array_job=TRUE ;;
+        h ) usage ;;
         \? ) usage ;;
     esac
 done

@@ -16,6 +16,15 @@ EOF
     exit 0
 }
 
+while getopts h OPT; do
+    case "$OPT" in
+        h ) usage ;;
+        \? ) usage ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
 iterations=$1
 interval_seconds=$2
 if [[ -z "${iterations}" ]]; then iterations=10; fi

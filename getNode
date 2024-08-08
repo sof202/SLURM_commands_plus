@@ -15,9 +15,10 @@ EOF
     exit 0
 }
 
-while getopts v OPT; do
+while getopts vh OPT; do
     case "$OPT" in
         v ) verbose=TRUE ;;
+        h ) usage ;;
         \? ) usage ;;
     esac
 done
