@@ -64,3 +64,29 @@ $ comp071
 getNode -v 123456
 $ Job 123456 is running on: comp071
 ```
+
+## getScriptLocation
+
+When running a shell script directly through `bash` you can obtain the location
+of the script very simply with `$0`. Unfortunately with SLURM scripts this is
+no longer possible as SLURM creates a copy of your script into 
+`/var/spool/slurmd/job[jobID]/slurm_script`.
+
+Allowing a script to know where it is on the file system can be very useful
+and helps with portability. If everyone would agree to run scripts from the
+directory they are in we could just use `$SLURM_SUBMIT_DIR`. But life isn't
+that easy unfortunately. 
+
+Introducing `getScriptLocation`. This script requires one input for the SLURM
+job ID, and can give a more verbose output if supplied with the `-v` option
+like so:
+
+```bash
+# outputs just the node
+getScriptLocation 123456
+$ /path/to/your/script
+
+# ouputs node in human readable format
+getScriptLocation -v 123456
+$ Job ${jobID} is located at: /path/to/your/script
+```
