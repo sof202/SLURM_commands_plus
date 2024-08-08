@@ -36,6 +36,10 @@ $ Enter job name: important-job-name
 How often do you find yourself using `sacct` over and over and over and over 
 and over again whilst waiting for a job to exit the pending/running stage?
 
+Have you ever been lazy enough to write zero log messages into your log/error
+files and so the only way you know a script is done is by running `sacct` or
+checking your emails every 5 seconds?
+
 Well now you don't have to, with `bacct`. This script will automatically
 update the output of sacct every 10 seconds for 10 iterations by default. You
 can provide it a different number of iterations with the first positional
@@ -46,7 +50,17 @@ argument like so:
 bacct 20
 ```
 
-Hooray!
+Sometimes `bacct` is updating too fast for your sensitive little eyes and you
+want it to slow down. You can do this by providing a second positional 
+argument:
+
+```bash
+# outputs sacct 20 times, once every minute
+bacct 20 60
+```
+
+Running this command can allow you to monitor your scripts status in the
+background. Perhaps on a second screen? Do what you will.
 
 ## getNode
 

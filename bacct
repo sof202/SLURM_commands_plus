@@ -6,7 +6,9 @@ cat << EOF
 bacct
 ===================================================================
 Purpose: Continuously runs sacct for x iterations
-Arguments: \$1 -> number of iterations [default: 10]
+Arguments: 
+\$1 -> Number of iterations [default: 10]
+\$2 -> Seconds between iterations [default: 10s]
 Author: Sam Fletcher
 Contact: s.o.fletcher@exeter.ac.uk
 ===================================================================
@@ -15,12 +17,15 @@ EOF
 }
 
 iterations=$1
+interval_seconds=$2
 if [[ -z "${iterations}" ]]; then iterations=10; fi
+if [[ -z "${interval_seconds}" ]]; then interval_seconds=10; fi
 if ! [[ "${iterations}" =~ ^[0-9]+$ ]]; then usage; fi
+if ! [[ "${interval_seconds}" =~ ^[0-9]+$ ]]; then usage; fi
 
 sequence=$(seq 1 "$iterations")
 for i in $sequence; do
     printf "\033[H\033[2J" #Moves terminal to current line
     sacct
-    sleep 10
+    sleep "${interval_seconds}"
 done
