@@ -32,6 +32,28 @@ $ Enter max memory (xxxG): 2G
 $ Enter job name: important-job-name
 ```
 
+The result is a file being created at the path you have specfied that looks
+like:
+
+```bash
+#!/bin/bash
+#SBATCH --export=ALL
+#SBATCH -p mrcq 
+#SBATCH --time=01:00:00
+#SBATCH -A Research_Project-MRC190311 
+#SBATCH --nodes=1 
+#SBATCH --ntasks-per-node=16
+#SBATCH --mem=2G
+#SBATCH --mail-type=END 
+#SBATCH --output=important-job-name%j.log
+#SBATCH --error=important-job-name%j.err
+#SBATCH --job-name=important-job-name
+
+```
+
+You can obviously change some elements here if it isn't to your liking. I'm not
+a mind reader of exactly what you want.
+
 ## bacct (a better sacct)
 
 How often do you find yourself using `sacct` over and over and over and over 
