@@ -6,8 +6,9 @@ off.
 Contained is a collection of scripts that you can add to your `$PATH` that
 may be of use to you.
 
-You can have this done for you by running the `setup` script located inside
-of the setup directory. Upon running please now execute the command:
+You can have these scripts added to your `$PATH` for you by running the `setup`
+script located inside of the setup directory. Upon running please now execute
+the command:
 
 ```bash
 source ~/.bash_profile
