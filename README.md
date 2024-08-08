@@ -54,6 +54,19 @@ like:
 You can obviously change some elements here if it isn't to your liking. I'm not
 a mind reader of exactly what you want.
 
+### array
+
+You may want your job to be an array instead of a boring normal job. You
+can accomplish this too by providing the `-a` option:
+
+```bash
+slurmScript -a path/to/new-script.sh
+$ Enter max wall time (HH:MM:SS): 01:00:00
+$ Enter max memory (xxxG): 2G
+$ Enter job array (x-y): 1-10
+$ Enter job name: important-job-name
+```
+
 ## bacct (a better sacct)
 
 How often do you find yourself using `sacct` over and over and over and over 

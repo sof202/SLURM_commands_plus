@@ -7,12 +7,22 @@ slurmScript
 ===================================================================
 Purpose: Creates a new slurm script with required SBATCH directives
 Arguments: \$1 -> path to new slurm script (required)
+Optional arguments: -a -> create an array job
 Author: Sam Fletcher
 Contact: s.o.fletcher@exeter.ac.uk
 ===================================================================
 EOF
     exit 0
 }
+
+while getopts a OPT; do
+    case "$OPT" in
+        a ) array_job=TRUE ;;
+        \? ) usage ;;
+    esac
+done
+
+shift $((OPTIND-1))
 
 script_path=$1
 if [[ $# -ne 1 ]]; then usage; fi
@@ -23,9 +33,15 @@ read -r wall_time
 echo "Enter max memory (xxxG):"
 read -r max_memory
 
+if [[ "${array_job}" == "TRUE" ]]; then
+    echo "Enter job array (x-y):"
+    read -r array
+fi
+
 echo "Enter job name:"
 read -r job_name
 
+if [[ "${array_job}" == "TRUE" ]]; then
 cat >> "${script_path}" << EOF
 #!/bin/bash
 #SBATCH --export=ALL
@@ -36,8 +52,26 @@ cat >> "${script_path}" << EOF
 #SBATCH --ntasks-per-node=16
 #SBATCH --mem=${max_memory}
 #SBATCH --mail-type=END 
+#SBATCH --output=${job_name}%A_%a.log
+#SBATCH --error=${job_name}%A_%a.err
+#SBATCH --job-name=${job_name}
+
+EOF
+else
+cat >> "${script_path}" << EOF
+#!/bin/bash
+#SBATCH --export=ALL
+#SBATCH -p mrcq 
+#SBATCH --time=${wall_time}
+#SBATCH -A Research_Project-MRC190311 
+#SBATCH --nodes=1 
+#SBATCH --ntasks-per-node=16
+#SBATCH --array=${array}
+#SBATCH --mem=${max_memory}
+#SBATCH --mail-type=END 
 #SBATCH --output=${job_name}%j.log
 #SBATCH --error=${job_name}%j.err
 #SBATCH --job-name=${job_name}
 
 EOF
+fi
