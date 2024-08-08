@@ -1,0 +1,11 @@
+#!/bin/bash
+
+iterations=$1
+if [[ -z $iterations ]]; then iterations=10; fi
+
+sequence=$(seq 1 "$iterations")
+for i in $sequence; do
+    printf "\033[H\033[2J" #Moves terminal to current line
+    sacct
+    sleep 10
+done
