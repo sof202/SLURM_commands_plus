@@ -56,12 +56,12 @@ like:
 ```
 
 You can obviously change some elements here if it isn't to your liking. I'm not
-a mind reader of exactly what you want.
+a mind reader, I don't know exactly what you want.
 
-### array
+### Array jobs
 
-You may want your job to be an array instead of a boring normal job. You
-can accomplish this too by providing the `-a` option:
+You may want your job to be an array instead of a *boring normal job*. You can
+accomplish this by providing the `-a` option:
 
 ```bash
 slurmScript -a path/to/new-script.sh
@@ -76,9 +76,9 @@ $ Enter job name: important-job-name
 How often do you find yourself using `sacct` over and over and over and over 
 and over again whilst waiting for a job to exit the pending/running stage?
 
-Have you ever been lazy enough to write zero log messages into your log/error
-files and so the only way you know a script is done is by running `sacct` or
-checking your emails every 5 seconds?
+Have you ever been *so lazy* that your scripts don't write a single log
+message into your log/error files and so the only way you know a script is
+done is by running `sacct` or checking your emails every 5 seconds?
 
 Well now you don't have to, with `bacct`. This script will automatically
 update the output of sacct every 10 seconds for 10 iterations by default. You
@@ -86,7 +86,7 @@ can provide it a different number of iterations with the first positional
 argument like so:
 
 ```bash
-# outputs sacct 20 times
+# Outputs sacct 20 times
 bacct 20
 ```
 
@@ -95,7 +95,7 @@ want it to slow down. You can do this by providing a second positional
 argument:
 
 ```bash
-# outputs sacct 20 times, once every minute
+# Outputs sacct 20 times, once every minute
 bacct 20 60
 ```
 
@@ -106,29 +106,38 @@ background. Perhaps on a second screen? Do what you will.
 
 Sometimes a script is running on a node that you don't want it to. In the past
 some nodes are down or have a full `/tmp` directory and yet scripts still run
-on them. SLURM doesn't tell you which node is being used for a script unless
-you start digging a little. This script will help you to detect these problems
-earlier.
+on them (what the *fuck* SLURM? How could you do this to me?). SLURM doesn't
+tell you which node is being used for a script unless you start digging a
+little. This script will help you to detect these problems earlier.
 
 `getNode` requires one input for the SLURM job ID, and can give a more verbose
 output if supplied with the `-v` option like so:
 
 ```bash
-# outputs just the node
+# Outputs just the node
 getNode 123456
-$ comp071
+$ mrc-comp071
 
-# ouputs node in human readable format
+# Outputs node in human readable format
 getNode -v 123456
-$ Job 123456 is running on: comp071
+$ Job 123456 is running on: mrc-comp071
 ```
+
+### Disclaimer
+
+You can actually get a SLURM script to display it's node list with the
+`$SLURM_JOB_NODELIST` enivronment variable. However, this is only accessible
+through the log files (which are more often than not, in a far off directory
+that you can't be bothered to travel to).
 
 ## getScriptLocation
 
 When running a shell script directly through `bash` you can obtain the location
-of the script very simply with `$0`. Unfortunately with SLURM scripts this is
-no longer possible as SLURM creates a copy of your script into 
-`/var/spool/slurmd/job[jobID]/slurm_script`.
+of the script very simply with `$0`. Unfortunately, SLURM  doesn't like things
+to be simple and this is approach no longer works. SLURM creates a copy of your
+script into `/var/spool/slurmd/job[jobID]/slurm_script` then runs it from here.
+As such `$0` will display this directory instead of the one you actually want,
+*thanks SLURM*.
 
 Allowing a script to know where it is on the file system can be very useful
 and helps with portability. If everyone would agree to run scripts from the
@@ -140,11 +149,11 @@ job ID, and can give a more verbose output if supplied with the `-v` option
 like so:
 
 ```bash
-# outputs script location
+# Outputs script location
 getScriptLocation 123456
 $ /path/to/your/script.sh
 
-# ouputs script location in human readable format
+# Outputs script location in human readable format
 getScriptLocation -v 123456
 $ script.sh (Job ID: 123456) is located at: /path/to/your/script.sh
 ```
@@ -153,11 +162,11 @@ Furthermore, you may just want to get the directory that the script is located
 in. To do this, provide the script with the `-d` option like so:
 
 ```bash
-# outputs the directory the script is in
+# Outputs the directory the script is in
 getScriptLocation -d 123456
 $ /path/to/script/directory
 
-# ouputs the directory the script is in in human readable format
+# Outputs the directory the script is in in human readable format
 getScriptLocation -vd 123456
 $ script.sh (Job ID: 123456) is located at: /path/to/script/directory
 ```
