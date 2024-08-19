@@ -51,10 +51,11 @@ cat >> "${script_path}" << EOF
 #SBATCH -A Research_Project-MRC190311 
 #SBATCH --nodes=1 
 #SBATCH --ntasks-per-node=16
+#SBATCH --array=${array}
 #SBATCH --mem=${max_memory}
 #SBATCH --mail-type=END 
-#SBATCH --output=${job_name}%A_%a.log
-#SBATCH --error=${job_name}%A_%a.err
+#SBATCH --output=${job_name}%j.log
+#SBATCH --error=${job_name}%j.err
 #SBATCH --job-name=${job_name}
 
 EOF
@@ -67,11 +68,10 @@ cat >> "${script_path}" << EOF
 #SBATCH -A Research_Project-MRC190311 
 #SBATCH --nodes=1 
 #SBATCH --ntasks-per-node=16
-#SBATCH --array=${array}
 #SBATCH --mem=${max_memory}
 #SBATCH --mail-type=END 
-#SBATCH --output=${job_name}%j.log
-#SBATCH --error=${job_name}%j.err
+#SBATCH --output=${job_name}%A_%a.log
+#SBATCH --error=${job_name}%A_%a.err
 #SBATCH --job-name=${job_name}
 
 EOF
