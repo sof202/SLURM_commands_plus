@@ -176,3 +176,24 @@ $ /path/to/script/directory
 getScriptLocation -vd 123456
 $ script.sh (Job ID: 123456) is located at: /path/to/script/directory
 ```
+
+## idleNodes
+
+In the past there have been nodes that you want to avoid. If you know what
+nodes are bad, you can avoid them entirely with `--nodelist=[node]`. However,
+if the nodes you pick aren't in the idle state, you'll be waiting a long time.
+This command displays all of the idle nodes for the specified partition. If no
+parition is given, then it displays all idle nodes.
+
+Run the command like this:
+
+```bash
+# Outputs all idle nodes from all partitions
+idleNodes
+
+# Outputs help information
+idleNodes -h # or --help
+
+# Outputs all idle nodes from the gpu queue
+idleNodes gpu
+```

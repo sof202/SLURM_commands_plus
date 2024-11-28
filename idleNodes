@@ -1,0 +1,36 @@
+#!/bin/bash
+
+usage() {
+cat << EOF
+===================================================================
+idleNodes
+===================================================================
+Purpose: Gets a list of the nodes that are currently idle
+Arguments: \$1 -> partition
+Author: Sam Fletcher
+Contact: s.o.fletcher@exeter.ac.uk
+===================================================================
+EOF
+    exit 0
+}
+
+
+if [[ $1 == "-h" || $1 == "--help"  ]]; then usage; fi
+
+if [[ -n $1 ]]; then
+parition=$1
+all_idle_nodes=$( \
+    sinfo -p "${parition}" | \
+    grep "idle" | \
+    awk '{print $6}' \
+)
+else
+all_idle_nodes=$( \
+    sinfo | \
+    grep "idle" | \
+    awk '{print $6}' \
+)
+fi
+
+echo "${all_idle_nodes}"
+
